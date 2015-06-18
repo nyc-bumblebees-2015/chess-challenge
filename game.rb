@@ -1,4 +1,5 @@
 require_relative 'board'
+require_relative 'view'
 
 class Chess
 
@@ -10,7 +11,7 @@ class Chess
   def run
     until @board.game_over?
 
-      puts @board
+      View.display(@board.to_s)
 
       print "White Player choose piece to move: "
       start_coord = STDIN.gets.chomp
@@ -18,7 +19,7 @@ class Chess
       end_coord = STDIN.gets.chomp
       @board.move(input_convert(start_coord), input_convert(end_coord))
 
-      puts @board
+      View.display(@board.to_s)
 
       print "Black Player choose piece to move: "
       start_coord = STDIN.gets.chomp

@@ -1,4 +1,5 @@
 require_relative 'piece'
+require_relative 'view'
 
 PIECE_ORDER  = [ Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
 
@@ -62,10 +63,11 @@ class Board
 
 end
 
-b = Board.new
-p b
-puts b
+# b = Board.new
+# # p b
+# puts b
+# puts View.display(b.to_s)
 
-b.move(11, 33)
-p b
-puts b
+# # b.move(11, 44)
+# # p b
+# # puts b
