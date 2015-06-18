@@ -101,16 +101,15 @@ class Board
   def initialize
     @board = {}
     @key_array = []
+    board_hash
   end
 
   def board_maker
-
     (0..7).each do |x|
       (0..7).each do |y|
         key_array << [x,y]
       end
     end
-    # return key_array
   end
 
   def board_hash
@@ -121,18 +120,17 @@ class Board
       board[key] = val
     end
     @board
-
   end
 
-  # def to_s
+  def to_s
   #   # binding.pry
-  #   @board
-  # end
+    @board.to_s
+  end
 
 end
 
 board = Board.new
-p board.board_hash
+puts board
 # my_piece = Rook.new(5, 3, board)
 # p my_piece.moves
 # # p my_game.king
