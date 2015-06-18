@@ -13,77 +13,94 @@ end
 module AxisMover
     def axis(x, y)
     ary = []
-    0..7.each {|x_cord| ary << [x_cord, y]}
-    0..7.each {|y_cord| ary << [x, y_cord]}
+    (0..7).each {|x_cord| ary << [x_cord, y]}
+    (0..7).each {|y_cord| ary << [x, y_cord]}
     return ary
   end
 end
 
 
 class Pieces
+  include AxisMover
+  include DiagonalMover
 
-  attr_reader :x, :y, :color
-  def initialize(x, y, color = :white)
+  attr_accessor :x, :y, :color
+  def initialize(x, y, board, color = :white)
     @x = x
     @y = y
+    @board = board
     @color = color
   end
+end
 
-  def rook
-    include AxisMover
-    AxisMover.axis(x, y)
+class Rook < Pieces
+  def moves
+    axis(x, y)
   end
+end
 
-  def bishop
-    include DiagonalMover
-    DiagonalMover.diagonal(x, y)
+class Bishop < Pieces
+  def moves
+    diagonal(x, y)
   end
+end
 
-  def queen
-    include DiagonalMover
-    include AxisMover
+class Queen < Pieces
+  def moves
     ary = []
-    ary << AxisMover.axis(x, y)
-    ary << DiagonalMover.diagonal(x, y)
-    ary.flatten
+  ary << axis(x, y)
+  ary << diagonal(x, y)
+  ary.flatten
   end
+end
 
-  def king
+class King < Pieces
+  def moves
     return [[x - 1, y], [x + 1, y], [x, y + 1], [x, y - 1], [x + 1, y + 1], [x + 1, y - 1], [x - 1, y - 1], [x - 1, y + 1]]
   end
+end
 
-  def knight
+class Knight < Pieces
+  def moves
     return [[x + 1, y + 2], [x + 2, y + 1], [x + 2, y - 1], [x + 1, y - 2], [x - 1, y - 2], [x - 2, y - 1], [x - 2, y + 1], [x - 1, y + 2]]
   end
+end
 
-  def pawn
+class Pawn < Pieces
+  def moves
     ary = []
-    if color == white
-      ary << [x, y + 1]
-      if y == 1
-        [x, y + 2]
-      end
-      if Board[x + 1, y + 1].color == black
-        ary << [x + 1, y + 1]
-      end
-    elsif Board[x - 1, y + 1].color == black
-      ary << [x - 1, y + 1]
+  if color == white
+    ary << [x, y + 1]
+    if y == 1
+      [x, y + 2]
     end
+    if @board[x + 1, y + 1].color == black
+      ary << [x + 1, y + 1]
+    end
+  elsif @board[x - 1, y + 1].color == black
+    ary << [x - 1, y + 1]
+  end
     if color == black
       ary << [x, y - 1]
       if y == 6
         [x, y - 2]
       end
-      if Board[x - 1, y - 1].color == white
+      if @board[x - 1, y - 1].color == white
         ary << [x - 1, y - 1]
       end
-    elsif Board[x + 1, y - 1].color == white
+    elsif @board[x + 1, y - 1].color == white
       ary << [x + 1, y - 1]
     end
   end
 end
 
-my_game = Pieces.new(5, 3)
+class Board
 
+end
 
-p my_game.rook
+board = Board.new
+my_piece = Rook.new(5, 3, board)
+p my_piece.moves
+# p my_game.king
+# p my_game.knight
+
