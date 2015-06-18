@@ -9,5 +9,15 @@ MAP_HASH = {"A8":[0,0], "B8":[0,1], "C8":[0,2], "D8":[0,3], "E8":[0,4], "F8":[0,
             "A1":[7,0], "B1":[7,1], "C1":[7,2], "D1":[7,3], "E1":[7,4], "F1":[7,5], "G1":[7,6], "H1":[7,7] }
 
   def initialize(board)
+    @board = {"A8":nil, "B8":nil, "C8":nil, "D8":nil, "E8":nil, "F8":nil, "G8":nil, "H8":nil,
+              "A7":nil, "B7":nil, "C7":nil, "D7":nil, "E7":nil, "F7":nil, "G7":nil, "H7":nil,
+              "A6":nil, "B6":nil, "C6":nil, "D6":nil, "E6":nil, "F6":nil, "G6":nil, "H6":nil,
+              "A5":nil, "B5":nil, "C5":nil, "D5":nil, "E5":nil, "F5":nil, "G5":nil, "H5":nil,
+              "A4":nil, "B4":nil, "C4":nil, "D4":Bishop.new("W"), "E4":nil, "F4":nil, "G4":nil, "H4":nil,
+              "A3":nil, "B3":nil, "C3":nil, "D3":nil, "E3":nil, "F3":nil, "G3":nil, "H3":nil,
+              "A2":nil, "B2":nil, "C2":nil, "D2":nil, "E2":nil, "F2":nil, "G2":nil, "H2":nil,
+              "A1":nil, "B1":nil, "C1":nil, "D1":nil, "E1":nil, "F1":nil, "G1":nil, "H1":nil }
   end
+
+
 end
