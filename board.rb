@@ -1,7 +1,8 @@
 require_relative 'piece'
 
-DIMENSION = 8
 class Board
+  DIMENSION = 8
+
   def initialize
     @board = {}
     @board[11] = Rook.new(:w)
@@ -13,8 +14,8 @@ class Board
     @board[17] = Knight.new(:w)
     @board[18] = Rook.new(:w)
     initialize_row_with_same(2, Pawn.new(:w))
-    (3..7).each { |row_num| initialize_row_with_same(row_num) }
-    initialize_row_with_same(8, Pawn.new(:b))
+    (3..6).each { |row_num| initialize_row_with_same(row_num) }
+    initialize_row_with_same(7, Pawn.new(:b))
     @board[81] = Rook.new(:b)
     @board[82] = Knight.new(:b)
     @board[83] = Bishop.new(:b)
@@ -25,13 +26,18 @@ class Board
     @board[88] = Rook.new(:b)
   end
 
-  def initialize_row_with_same(row_num, piece = nil)
+  def initialize_row_with_same(row_num, piece = " ")
     (1..DIMENSION).each do |col|
       @board[row_num * 10 + col] = piece
     end
   end
 
   def to_s
+    @board.values.reverse.each_slice(8).to_a.map { |row| row.join("  ") }.join("\n")
   end
 
 end
+
+b = Board.new
+p b
+puts b
