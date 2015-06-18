@@ -32,12 +32,38 @@ class Board
     (1..DIMENSION).each { |col| @board[row_num * 10 + col] = piece }
   end
 
+  def move(start_coord, end_coord)
+    @board[end_coord] = @board[start_coord]
+    @board[start_coord] = " "
+  end
+
+  # def select_piece(coord, player_color)
+  #   @board[coord] != " " && @board[coord].color == player_color
+  # end
+
+  # def valid_moves(coord)
+  #   possible_moves = @board[coord].moves # a 2D array
+  #   possible_moves.each do |dir|
+  #     dir = filter(dir)
+  #   end
+  # end
+
+  # def filter(possible_moves)
+
+  # end
+
+
+
   def to_s
-    @board.values.reverse.each_slice(DIMENSION).to_a.map { |row| row.join("  ") }.join("\n")
+    @board.values.reverse.each_slice(DIMENSION).to_a.map { |row| row.reverse.join("  ") }.join("\n")
   end
 
 end
 
-b = Board.new
-p b
-puts b
+# b = Board.new
+# p b
+# puts b
+
+# b.move(11, 33)
+# p b
+# puts b
