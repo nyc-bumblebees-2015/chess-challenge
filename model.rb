@@ -11,10 +11,11 @@ module DiagonalMover
 end
 
 module AxisMover
-  def axis(x, y)
+    def axis(x, y)
     ary = []
     0..7.each {|x_cord| ary << [x_cord, y]}
     0..7.each {|y_cord| ary << [x, y_cord]}
+    return ary
   end
 end
 
@@ -28,17 +29,17 @@ class Pieces
     @color = color
   end
 
-  def rook(x, y)
+  def rook
     include AxisMover
     AxisMover.axis(x, y)
   end
 
-  def bishop(x, y)
+  def bishop
     include DiagonalMover
     DiagonalMover.diagonal(x, y)
   end
 
-  def queen(x, y)
+  def queen
     include DiagonalMover
     include AxisMover
     ary = []
@@ -47,15 +48,15 @@ class Pieces
     ary.flatten
   end
 
-  def king(x, y)
+  def king
     return [[x - 1, y], [x + 1, y], [x, y + 1], [x, y - 1], [x + 1, y + 1], [x + 1, y - 1], [x - 1, y - 1], [x - 1, y + 1]]
   end
 
-  def knight(x, y)
-    return [[x + 1, y + 2], [x + 2, y + 1], [x + 2, y - 1], [x + 1, y - 2], [x -1, y - 2], [x - 2, y - 1], [x - 2, y + 1], [x - 1, y + 2]]
+  def knight
+    return [[x + 1, y + 2], [x + 2, y + 1], [x + 2, y - 1], [x + 1, y - 2], [x - 1, y - 2], [x - 2, y - 1], [x - 2, y + 1], [x - 1, y + 2]]
   end
 
-  def pawn(x, y, color)
+  def pawn
     ary = []
     if color == white
       ary << [x, y + 1]
@@ -80,7 +81,9 @@ class Pieces
       ary << [x + 1, y - 1]
     end
   end
-
-
 end
 
+my_game = Pieces.new(5, 3)
+
+
+p my_game.rook
