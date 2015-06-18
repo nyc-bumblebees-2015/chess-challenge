@@ -8,7 +8,7 @@ MAP_HASH = {"A8":[0,0], "B8":[0,1], "C8":[0,2], "D8":[0,3], "E8":[0,4], "F8":[0,
             "A2":[6,0], "B2":[6,1], "C2":[6,2], "D2":[6,3], "E2":[6,4], "F2":[6,5], "G2":[6,6], "H2":[6,7],
             "A1":[7,0], "B1":[7,1], "C1":[7,2], "D1":[7,3], "E1":[7,4], "F1":[7,5], "G1":[7,6], "H1":[7,7] }
 
-  def initialize(board)
+  def initialize
     @board = {"A8":nil, "B8":nil, "C8":nil, "D8":nil, "E8":nil, "F8":nil, "G8":nil, "H8":nil,
               "A7":nil, "B7":nil, "C7":nil, "D7":nil, "E7":nil, "F7":nil, "G7":nil, "H7":nil,
               "A6":nil, "B6":nil, "C6":nil, "D6":nil, "E6":nil, "F6":nil, "G6":nil, "H6":nil,
@@ -19,5 +19,10 @@ MAP_HASH = {"A8":[0,0], "B8":[0,1], "C8":[0,2], "D8":[0,3], "E8":[0,4], "F8":[0,
               "A1":nil, "B1":nil, "C1":nil, "D1":nil, "E1":nil, "F1":nil, "G1":nil, "H1":nil }
   end
 
+  def to_s
+    @board
+  end
 
 end
+
+board = Board.new

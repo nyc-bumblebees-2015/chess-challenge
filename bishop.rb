@@ -3,4 +3,7 @@ class Bishop
     @color = color
     @marker = "B"
   end
+
+
+
 end
