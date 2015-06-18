@@ -1,5 +1,7 @@
 require_relative 'piece'
 
+PIECE_ORDER  = [ Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
+
 class Board
   DIMENSION = 8
 
@@ -27,13 +29,11 @@ class Board
   end
 
   def initialize_row_with_same(row_num, piece = " ")
-    (1..DIMENSION).each do |col|
-      @board[row_num * 10 + col] = piece
-    end
+    (1..DIMENSION).each { |col| @board[row_num * 10 + col] = piece }
   end
 
   def to_s
-    @board.values.reverse.each_slice(8).to_a.map { |row| row.join("  ") }.join("\n")
+    @board.values.reverse.each_slice(DIMENSION).to_a.map { |row| row.join("  ") }.join("\n")
   end
 
 end
