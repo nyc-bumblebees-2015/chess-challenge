@@ -19,6 +19,14 @@ MAP_HASH = {"A8":[0,0], "B8":[0,1], "C8":[0,2], "D8":[0,3], "E8":[0,4], "F8":[0,
               "A1":nil, "B1":nil, "C1":nil, "D1":nil, "E1":nil, "F1":nil, "G1":nil, "H1":nil }
   end
 
+  def convert_board_to_user(board_coord)
+    MAP_HASH.key(board_coord)
+  end
+
+  def convert_user_to_board(user_coord)
+    MAP_HASH[user_coord]
+  end
+
   def to_s
     @board
   end
