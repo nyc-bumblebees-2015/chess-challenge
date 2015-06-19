@@ -14,7 +14,7 @@ class Board
     initialize_row_with_formation(8, :b)
   end
 
-  def initialize_row_with_same(row_num, piece = nil)
+  def initialize_row_with_same(row_num, piece = ' ')
     (1..DIMENSION).each { |col| @board[row_num * 10 + col] = piece }
   end
 
@@ -26,16 +26,16 @@ class Board
 
   def move(start_coord, end_coord)
     @board[end_coord] = @board[start_coord]
-    @board[start_coord] = nil
+    @board[start_coord] = ' '
   end
 
   def select_piece(coord, player_color)
-    @board[coord] && @board[coord].color == player_color
+    @board[coord] != ' ' && @board[coord].color == player_color
   end
 
   def valid_moves(coord)
     piece = @board[coord]
-    if piece
+    if piece != ' '
       color = piece.color
       piece.moves(coord).map  { |dir| dir = filter_invalid_moves(dir, color) }.flatten
     end
@@ -46,17 +46,18 @@ class Board
   end
 
   def remove_blocked_moves(possible_moves)
-    endpoint = possible_moves.index { |coord| @board[coord] }
+    endpoint = possible_moves.index { |coord| @board[coord] != ' ' }
     endpoint ? possible_moves[0..endpoint] : possible_moves
   end
 
   def check_path_endpoint(possible_moves, color)
     piece = @board[possible_moves[-1]]
-    possible_moves.delete_at(-1) if piece != nil && piece.color == color
+    possible_moves.delete_at(-1) if piece != ' ' && piece.color == color
     possible_moves
   end
 
   def game_over?
+    #board has only 1 king
     false
   end
 
