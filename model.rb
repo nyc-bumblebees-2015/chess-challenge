@@ -131,8 +131,10 @@ end
 
 board = Board.new
 # puts board
-my_piece = Rook.new(5, 3, board)
-p my_piece.moves
+# my_piece = Rook.new(5, 3, board)
+# p my_piece.moves
+# bishop = Bishop.new(5, 3, board)
+# p bishop.moves
 # # p my_game.king
 # # p my_game.knight
 
