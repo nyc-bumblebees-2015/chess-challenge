@@ -25,12 +25,10 @@ class Board
     raise KeyError, "Invalid board space"
   end
 
-  def board_move(origin,destination)
-    converted_origin = convert_user_to_board(origin)
-    converted_destination = convert_user_to_board(destination)
-    if @board[origin].move?(converted_origin,converted_destination,board)
-      @board[destination] = @board[origin]
-      @board[origin] = nil
+  def move_piece(origin,destination)
+      if board[origin].move?(origin,destination,board)
+      board[destination] = board[origin]
+      board[origin] = nil
     else
       puts "not a valid move"
     end
