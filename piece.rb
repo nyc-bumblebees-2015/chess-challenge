@@ -118,6 +118,3 @@ class Pawn < Piece
   end
 
 end
-
-testing = Knight.new(:b)
-p testing.moves(87)
