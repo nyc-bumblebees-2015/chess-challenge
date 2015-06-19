@@ -23,10 +23,10 @@ module Direction
     7.times do |i|
       u = (num + 1 * (i + 1))
       d = (num - 1 * (i + 1))
-      if (u % 10) <= 8
+      if (u % 10) <= 8 && u.to_s.split('')[0] == num.to_s.split('')[0]
         up << u
       end
-      if (d % 10) >= 1
+      if (d % 10) >= 1 && d.to_s.split('')[0] == num.to_s.split('')[0]
         down << d
       end
     end
@@ -45,5 +45,5 @@ class Test
     #Direction.vertical(@num)
   end
 end
-testing = Test.new(34)
+testing = Test.new(44)
 p testing.run
