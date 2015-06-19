@@ -1,4 +1,4 @@
-require_relative 'bishop'
+require_relative 'board'
 require 'pry'
 class Bishop
 
@@ -24,7 +24,7 @@ class Bishop
     until distance == 1 do
       oy += horizontal
       ox += vertical
-      if board[ox.to_s + oy.to_s] != nil
+      if board[:"#{ox}#{oy}"] != nil
         return false
       end
       distance -= 1
