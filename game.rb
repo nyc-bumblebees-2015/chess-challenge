@@ -6,33 +6,49 @@ class Chess
   DIMENSION = 8
   def initialize(board)
     @board = board
-    binding.pry
+    # binding.pry
     run
   end
 
   def run
+    game_turn = 1
     until @board.game_over?
+      game_turn % 2 == 0 ? player = :b : player = :w
+      View.display(@board.to_s)
+
+      begin
+        View.player_choose_piece(player)
+        start_coord = trim_input(STDIN.gets)
+        until valid_coord?(start_coord)
+          View.valid_coord
+          start_coord = trim_input(STDIN.gets)
+          select_key = coord_key_convert(start_coord)
+        end
+
+        select_key = coord_key_convert(start_coord)
+        View.select_own_pieces(player) if !@board.select_piece(select_key, player)
+      end until @board.select_piece(select_key, player)
+
+      # valid_moves = @board.valid_moves(select_key).map { |key| coord_key_convert(key) }
+
+      # View.possible_moves(valid_moves)
+
+      View.player_choose_move(player)
+      end_coord = trim_input(STDIN.gets)
+      @board.move(coord_key_convert(start_coord), coord_key_convert(end_coord))
 
       View.display(@board.to_s)
 
-      print "White Player choose piece to move: "
-      start_coord = STDIN.gets.chomp
-      print "White Player choose place to move to: "
-      end_coord = STDIN.gets.chomp
-      @board.move(input_convert(start_coord), input_convert(end_coord))
-
-      View.display(@board.to_s)
-
-      print "Black Player choose piece to move: "
-      start_coord = STDIN.gets.chomp
-      print "Black Player choose place to move to: "
-      end_coord = STDIN.gets.chomp
-      @board.move(input_convert(start_coord), input_convert(end_coord))
+      game_turn += 1
     end
 
   end
 
   #private
+  def trim_input(input)
+    input.chomp.downcase
+  end
+
   def valid_coords
     rows = ('a'..'z').to_a[0...DIMENSION] * DIMENSION
     cols = ('1'..'26').to_a[0...DIMENSION].map { |col_num| col_num * DIMENSION }.map(&:chars).flatten
@@ -49,8 +65,8 @@ class Chess
 
     row_key_value_pairs = row_keys.zip(row_values)
     row_hash = row_key_value_pairs.each_with_object({}) { |pairs, hash| hash[pairs[0]] = pairs[-1] }
-    binding.pry
-    row, col = coord.downcase.chars
+    # binding.pry
+    row, col = coord.chars
     "#{row_hash[row]}#{col}".to_i
   end
 
