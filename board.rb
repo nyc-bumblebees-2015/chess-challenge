@@ -20,7 +20,7 @@ class Board
 
   def initialize_row_with_formation(row_num, color)
     START_FORMATION.each_with_index do |piece, col|
-      @board[row_num * 10 + col] = piece.new(color)
+      @board[row_num * 10 + col + 1] = piece.new(color)
     end
   end
 
@@ -34,12 +34,15 @@ class Board
   end
 
   def valid_moves(coord)
-    color = @board[coord].color
-    @board[coord].moves.map  { |dir| dir = filter_invalid_moves(dir, color) }
+    piece = @board[coord]
+    if piece
+      color = piece.color
+      piece.moves(coord).map  { |dir| dir = filter_invalid_moves(dir, color) }.flatten
+    end
   end
 
   def filter_invalid_moves(possible_moves, color)
-    check_path_endpoint(removed_blocked_moves(possible_moves), color)
+    check_path_endpoint(remove_blocked_moves(possible_moves), color)
   end
 
   def remove_blocked_moves(possible_moves)
@@ -49,7 +52,7 @@ class Board
 
   def check_path_endpoint(possible_moves, color)
     piece = @board[possible_moves[-1]]
-    possible_moves.delete_at(-1) if piece && piece.color == color
+    possible_moves.delete_at(-1) if piece != nil && piece.color == color
     possible_moves
   end
 
@@ -62,3 +65,4 @@ class Board
   end
 
 end
+
