@@ -109,7 +109,7 @@ class Pawn < Piece
       up_right = (num - 11)
       up_left = (num - 9)
     end
-    [[up],[up_right],[up_left]].delete_if {|number|  number[0] > 88 || number[0] < 11}
+    [[up],[up_right],[up_left]].delete_if {|number|  number[0] > 88 || number[0] < 11 || number[0] % 10 < 1 || number[0] % 10 > 8}
   end
 
 
