@@ -1,14 +1,10 @@
 require 'pry'
-require 'matrix'
-# need to figure out how to make ary constant in module method, so this can recurse.
-module DiagonalMover
-  def diagonal(pos)
-    vec_array = [[1, 1], [-1, 1], [1, -1], [-1, -1]]
+module Mover
+  def move(pos, vec_array)
     ary = []
     x = pos[0]
     y = pos[1]
     vec_array.each do |vec|
-
       while @board.include?([x, y])
         x += vec[0]
         y += vec[1]
@@ -25,19 +21,9 @@ module DiagonalMover
   end
 end
 
-module AxisMover
-    def axis(x, y)
-    ary = []
-    (0..7).each {|x_cord| ary << [x_cord, y]}
-    (0..7).each {|y_cord| ary << [x, y_cord]}
-    return ary
-  end
-end
-
 
 class Pieces
-  include AxisMover
-  include DiagonalMover
+  include Mover
 
   attr_accessor :x, :y, :color
   def initialize(x, y, board, color = :white)
@@ -56,7 +42,7 @@ end
 
 class Bishop < Pieces
   def moves
-    diagonal([x, y])
+    move([x, y])
   end
 end
 
@@ -64,7 +50,7 @@ class Queen < Pieces
   def moves
     ary = []
   ary << axis(x, y)
-  ary << diagonal(x, y)
+  ary << move(x, y)
   ary.flatten
   end
 end
@@ -112,7 +98,7 @@ class Pawn < Pieces
 end
 
 class Board
-  include DiagonalMover
+  include Mover
   attr_reader :board, :key_array
   def initialize
     @board = {}
