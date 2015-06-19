@@ -133,9 +133,18 @@ class Board
     key_array.include?(array)
   end
 
+  def move(loc1, loc2)
+    @board[loc2] = @board[loc1]
+    @board[loc1] = nil
+  end
+
 end
 
-# board = Board.new
+my_board = Board.new
+my_board.board[[3, 1]] = "stuff"
+puts my_board
+my_board.move([3, 1], [5, 1])
+puts my_board
 # p board.include?([5, 3])
 # my_piece = Rook.new(5, 3, board)
 # # p my_piece.moves
