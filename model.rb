@@ -43,7 +43,8 @@ end
 
 class Bishop < Pieces
   def moves
-    move([x, y])
+    vec_array = [[1, 1], [1, -1], [-1, 1], [-1, -1]]
+    move([x, y], vec_array)
   end
 end
 
