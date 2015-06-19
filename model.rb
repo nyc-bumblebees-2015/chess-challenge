@@ -1,19 +1,27 @@
 require 'pry'
+require 'matrix'
 # need to figure out how to make ary constant in module method, so this can recurse.
 module DiagonalMover
-  ary = []
-  def diagonal(x, y)
-    # while ary.length < 14
-      if Board.new.include?([x, y])
-        ary << [x + 1, y + 1]
-        ary << [x + 1, y - 1]
-        ary << [x - 1, y + 1]
-        ary << [x - 1, y - 1]
-      # binding.pry
-        diagonal(ary[0][0], ary[0][1])
+  def diagonal(pos)
+    vec_array = [[1, 1], [-1, 1], [1, -1], [-1, -1]]
+    ary = []
+    x = pos[0]
+    y = pos[1]
+    vec_array.each do |vec|
+
+      while @board.include?([x, y])
+        x += vec[0]
+        y += vec[1]
+        if @board.include?([x, y])
+          ary << [x,y]
+        else
+          x = pos[0]
+          y = pos[1]
+          break
+        end
       end
-    # end
-    return ary
+    end
+  return ary
   end
 end
 
@@ -48,7 +56,7 @@ end
 
 class Bishop < Pieces
   def moves
-    diagonal(x, y)
+    diagonal([x, y])
   end
 end
 
@@ -141,10 +149,10 @@ class Board
 
 end
 
-board = Board.new
-p board.include?([5, 3])
+# board = Board.new
+# p board.include?([5, 3])
 # my_piece = Rook.new(5, 3, board)
-# p my_piece.moves
+# # p my_piece.moves
 # bishop = Bishop.new(5, 3, board)
 # p bishop.moves
 # # p my_game.king
