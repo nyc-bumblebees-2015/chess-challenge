@@ -61,7 +61,7 @@ class Board
   end
 
   def to_s
-    @board.values.reverse.each_slice(8).to_a.map { |row| row.join( "  ") }.join("\n")
+    @board.values.reverse.each_slice(8).to_a.map { |row| row.reverse.join( "  ") }.join("\n")
   end
 
 end

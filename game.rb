@@ -29,9 +29,10 @@ class Chess
         View.select_own_pieces(player) if !@board.select_piece(select_key, player)
       end until @board.select_piece(select_key, player)
 
-      # valid_moves = @board.valid_moves(select_key).map { |key| coord_key_convert(key) }
+      p @board.valid_moves(select_key)
+      valid_moves = @board.valid_moves(select_key).map { |key| key_coord_convert(key) }
 
-      # View.possible_moves(valid_moves)
+      View.possible_moves(valid_moves)
 
       begin
         View.player_choose_move(player)
@@ -63,6 +64,7 @@ class Chess
   end
 
   def coord_key_convert(coord)
+    # binding.pry
     row_keys = ('a'..'z').to_a[0...DIMENSION]
     row_values = (1..DIMENSION).to_a
 
@@ -71,6 +73,20 @@ class Chess
     # binding.pry
     row, col = coord.chars
     "#{row_hash[row]}#{col}".to_i
+  end
+
+  def key_coord_convert(key)
+
+    row_keys = (1..DIMENSION).to_a
+    row_values = ('a'..'z').to_a[0...DIMENSION]
+
+    row_key_value_pairs = row_keys.zip(row_values)
+    key_hash = row_key_value_pairs.each_with_object({}) { |pairs, hash| hash[pairs[0]] = pairs[-1] }
+
+    # binding.pry
+    row, col = key.to_s.chars
+    "#{key_hash[row.to_i]}#{col}"
+    # binding.pry
   end
 
 end
