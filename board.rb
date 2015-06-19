@@ -29,28 +29,36 @@ class Board
     @board[88] = Rook.new(:b)
   end
 
-  def initialize_row_with_same(row_num, piece = " ")
+  def initialize_row_with_same(row_num, piece = ' ')
     (1..DIMENSION).each { |col| @board[row_num * 10 + col] = piece }
   end
 
   def move(start_coord, end_coord)
     @board[end_coord] = @board[start_coord]
-    @board[start_coord] = " "
+    @board[start_coord] = ' '
   end
 
   def select_piece(coord, player_color)
-    @board[coord] != " " && @board[coord].color == player_color
+    @board[coord] != ' ' && @board[coord].color == player_color
   end
 
   def valid_moves(coord)
-    possible_moves = @board[coord].moves # a 2D array
-    possible_moves.each do |dir|
-      dir = filter(dir)
-    end
+    color = @board[coord].color
+    @board[coord].moves.map  { |dir| dir = filter_invalid_moves(dir, color) }
   end
 
-  def filter(possible_moves)
+  def filter_invalid_moves(possible_moves, color)
+    check_path_endpoint(trim_possible_moves(possible_moves), color)
+  end
 
+  def trim_possible_moves (possible_moves)
+    endpoint = possible_moves.index { |coord| @board[coord] != ' ' }
+    possible_moves[0..endpoint]
+  end
+
+  def check_path_endpoint (possible_moves, color)
+    possible_moves.delete_at(-1) if @board[possible_moves[-1]].color == color
+    possible_moves
   end
 
   def game_over?
@@ -63,14 +71,12 @@ class Board
 
 end
 
-# b = Board.new
-# puts b
-# p b.select_piece(11, :b)
-# p b.select_piece(11, :w)
-p b.select_piece(33, :w)
-# puts b
-# puts View.display(b.to_s)
+b = Board.new
+View.display(b.to_s)
 
-# b.move(11, 44)
-# p b
-# puts b
+moves_25 = [[[36, 47, 58], [34, 43, 52, 61], [16], [14]], [[26, 27, 28], [24, 23, 22, 21]], [[26, 27, 28], [24, 23, 22, 21]]]
+one_dir = [24, 23, 22, 21]
+
+# p moves_25
+p one_dir
+p b.check_path_endpoint(one_dir, :w)
