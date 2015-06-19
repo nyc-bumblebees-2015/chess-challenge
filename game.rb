@@ -33,8 +33,11 @@ class Chess
 
       # View.possible_moves(valid_moves)
 
-      View.player_choose_move(player)
-      end_coord = trim_input(STDIN.gets)
+      begin
+        View.player_choose_move(player)
+        end_coord = trim_input(STDIN.gets)
+      end until valid_moves.include?(end_coord)
+
       @board.move(coord_key_convert(start_coord), coord_key_convert(end_coord))
 
       View.display(@board.to_s)
