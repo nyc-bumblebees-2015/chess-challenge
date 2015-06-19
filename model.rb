@@ -70,28 +70,30 @@ end
 class Pawn < Pieces
   def moves
     ary = []
-  if color == white
+  if color == :white
     ary << [x, y + 1]
     if y == 1
-      [x, y + 2]
+      ary << [x, y + 2]
     end
-    if @board[x + 1, y + 1].color == black
-      ary << [x + 1, y + 1]
-    end
-  elsif @board[x - 1, y + 1].color == black
-    ary << [x - 1, y + 1]
+  #   if @board[x + 1, y + 1].color == :black
+  #     ary << [x + 1, y + 1]
+  #   end
+  # elsif @board[x - 1, y + 1].color == :black
+  #   ary << [x - 1, y + 1]
   end
-    if color == black
+  return ary
+    if color == :black
       ary << [x, y - 1]
       if y == 6
         [x, y - 2]
       end
-      if @board[x - 1, y - 1].color == white
-        ary << [x - 1, y - 1]
-      end
-    elsif @board[x + 1, y - 1].color == white
-      ary << [x + 1, y - 1]
+    #   if @board[x - 1, y - 1].color == :white
+    #     ary << [x - 1, y - 1]
+    #   end
+    # elsif @board[x + 1, y - 1].color == :white
+    #   ary << [x + 1, y - 1]
     end
+    return ary
   end
 end
 
