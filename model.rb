@@ -75,11 +75,11 @@ class Pawn < Pieces
     if y == 1
       ary << [x, y + 2]
     end
-  #   if @board[x + 1, y + 1].color == :black
-  #     ary << [x + 1, y + 1]
-  #   end
-  # elsif @board[x - 1, y + 1].color == :black
-  #   ary << [x - 1, y + 1]
+    if @board[x + 1, y + 1].color == :black
+      ary << [x + 1, y + 1]
+    end
+  elsif @board[x - 1, y + 1].color == :black
+    ary << [x - 1, y + 1]
   end
   return ary
     if color == :black
@@ -87,11 +87,11 @@ class Pawn < Pieces
       if y == 6
         [x, y - 2]
       end
-    #   if @board[x - 1, y - 1].color == :white
-    #     ary << [x - 1, y - 1]
-    #   end
-    # elsif @board[x + 1, y - 1].color == :white
-    #   ary << [x + 1, y - 1]
+      if @board[x - 1, y - 1].color == :white
+        ary << [x - 1, y - 1]
+      end
+    elsif @board[x + 1, y - 1].color == :white
+      ary << [x + 1, y - 1]
     end
     return ary
   end
@@ -129,10 +129,14 @@ class Board
     @board.to_s
   end
 
+  def include?(array)
+    key_array.include?(array)
+  end
+
 end
 
 board = Board.new
-# puts board
+p board.include?([5, 3])
 # my_piece = Rook.new(5, 3, board)
 # p my_piece.moves
 # bishop = Bishop.new(5, 3, board)

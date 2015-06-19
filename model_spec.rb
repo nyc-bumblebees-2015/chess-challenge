@@ -30,9 +30,17 @@ describe Pieces do
   #     expect(queen.moves).to eq([[0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [5, 0], [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7],[6, 4], [6, 2], [4, 4], [4, 2], [7, 5], [7, 1], [3, 5], [3, 1], [2, 6], [2, 0], [1, 7]])
   #   end
 
-  let (:pawn) {Pawn.new(6, 1, board)}
-    it "should return all possible moves for white pawn" do
-      expect(pawn.moves).to eq([[6, 2], [6, 3]])
+  # let (:pawn) {Pawn.new(6, 1, board)}
+  #   it "should return all possible moves for white pawn" do
+  #     expect(pawn.moves).to eq([[6, 2], [6, 3]])
+  #   end
+end
+
+describe Board do
+  let (:board) {Board.new}
+    it "should return true for 5, 3" do
+      expect(board.include?([5, 3])).to eq(true)
     end
+
 end
 
