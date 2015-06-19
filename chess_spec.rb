@@ -1,16 +1,39 @@
+require_relative 'chess_controller'
 require_relative 'board'
 require_relative 'bishop'
 
-describe 'Board' do
-  let(:chess_board) {Board.new}
-  it "initializes with a board hash representing the 64 spaces on the board" do
-    expect(chess_board.board.size).to eq 64
+RSpec.describe 'Controller' do
+  it 'can convert user passed coordinate string to internal coordinates (regardless of case)' do
+    expect(convert_user_to_board "a8").to eq :"00"
+    expect(convert_user_to_board "a1").to eq :"70"
+    expect(convert_user_to_board "H8").to eq :"07"
+    expect(convert_user_to_board "H1").to eq :"77"
   end
 
+  it 'can convert internal coordinates to user string representation' do
+    expect(convert_board_to_user :"00").to eq "A8"
+    expect(convert_board_to_user :"70").to eq "A1"
+    expect(convert_board_to_user :"07").to eq "H8"
+    expect(convert_board_to_user :"77").to eq "H1"
+  end
+
+end
+
+describe 'Board' do
+  let(:board) {Board.new}
+   #it "initializes with a board hash representing the 64 spaces on the board" do
+   #   expect(board.board.size).to eq 64
+    #end
+
   context "moves pieces on the board" do
-    let(:chess_board){Board.new}
     let(:bishop) {Bishop.new("white")}
    
+    it 'raises an error if user attempts to access a nonexistent space' do
+      expect(board[:'81']).to raise_error KeyError
+    end
+  end
+end
+__END__
     it "makes legal moves" do
       chess_board.instance_variable_set(:@board,
            {"A8" => nil, "B8" => nil, "C8" => nil, "D8" => nil, "E8" => nil, "F8" => nil, "G8" => nil, "H8" => nil,
