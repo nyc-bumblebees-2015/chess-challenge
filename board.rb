@@ -57,8 +57,7 @@ class Board
   end
 
   def game_over?
-    #board has only 1 king
-    false
+    @board.values.count { |piece| piece.is_a? King } == 1
   end
 
   def to_s
@@ -66,4 +65,3 @@ class Board
   end
 
 end
-
