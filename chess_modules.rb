@@ -14,7 +14,7 @@ module Direction
         left << l
       end
     end
-    [left,right]
+    [right,left]
   end
 
   def self.horizontal(num)
@@ -32,18 +32,40 @@ module Direction
     end
     [up,down]
   end
-end
 
-
-class Test
-  def initialize(num)
-    @num = num
+  def self.diagonal(num)
+    top_right = []
+    top_left = []
+    bottom_right = []
+    bottom_left = []
+    7.times do |i|
+      tr = (num + 11 * (i + 1))
+      if tr <= 88
+        break if tr % 10 > 8
+        top_right << tr
+      end
+    end
+    7.times do |i|
+      tl = (num + 9 * (i + 1))
+      if tl <= 88
+        break if tl % 10 < 1
+        top_left << tl
+      end
+    end
+    7.times do |i|
+      br = (num - 9 * (i + 1))
+      if br >= 11
+        break if br % 10 > 8
+        bottom_right << br
+      end
+    end
+    7.times do |i|
+      bl = (num - 11 * (i + 1))
+      if bl >= 11
+        break if bl % 10 < 1
+        bottom_left << bl
+      end
+    end
+    [top_right,top_left,bottom_right,bottom_left]
   end
-
-  def run
-    Direction.horizontal(@num)
-    #Direction.vertical(@num)
-  end
 end
-testing = Test.new(44)
-p testing.run
