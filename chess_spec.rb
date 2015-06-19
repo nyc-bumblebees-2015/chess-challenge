@@ -4,17 +4,17 @@ require_relative 'bishop'
 
 RSpec.describe 'Controller' do
   it 'can convert user passed coordinate string to internal coordinates (regardless of case)' do
-    expect(convert_user_to_board "a8").to eq :"00"
-    expect(convert_user_to_board "a1").to eq :"70"
-    expect(convert_user_to_board "H8").to eq :"07"
-    expect(convert_user_to_board "H1").to eq :"77"
+    expect(convert_user_to_board "a8").to eq [0,0]
+    expect(convert_user_to_board "a1").to eq [7,0]
+    expect(convert_user_to_board "H8").to eq [0,7]
+    expect(convert_user_to_board "H1").to eq [7,7]
   end
 
   it 'can convert internal coordinates to user string representation' do
-    expect(convert_board_to_user :"00").to eq "A8"
-    expect(convert_board_to_user :"70").to eq "A1"
-    expect(convert_board_to_user :"07").to eq "H8"
-    expect(convert_board_to_user :"77").to eq "H1"
+    expect(convert_board_to_user [0,0]).to eq "A8"
+    expect(convert_board_to_user [7,0]).to eq "A1"
+    expect(convert_board_to_user [0,7]).to eq "H8"
+    expect(convert_board_to_user [7,7]).to eq "H1"
   end
 
 end
