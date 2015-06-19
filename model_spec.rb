@@ -20,10 +20,10 @@ describe Pieces do
       expect(king.moves).to eq([[4, 3], [6, 3], [5, 4], [5, 2], [6, 4], [6, 2], [4, 2], [4, 4]])
   end
 
-  # let (:bishop) {Bishop.new(5, 3, board)}
-  #   it "should return all possible moves for bishop" do
-  #     expect(bishop.moves).to eq([[6, 4], [6, 2], [4, 4], [4, 2], [7, 5], [7, 1], [3, 5], [3, 1], [2, 6], [2, 0], [1, 7]])
-  #   end
+  let (:bishop) {Bishop.new(5, 3, board)}
+    it "should return all possible moves for bishop" do
+      expect(bishop.moves).to eq([[6, 4], [6, 2], [4, 4], [4, 2], [7, 5], [7, 1], [3, 5], [3, 1], [2, 6], [2, 0], [1, 7]])
+    end
 
   # let (:queen) {Queen.new(5,3,board)}
   #   it "should return all possible moves for queen (rook then bishop)" do

@@ -1,13 +1,19 @@
 require 'pry'
+# need to figure out how to make ary constant in module method, so this can recurse.
 module DiagonalMover
+  ary = []
   def diagonal(x, y)
-    ary = []
-    while Board.include?(x, y)
-      ary << [x + 1, y + 1]
-      ary << [x + 1, y - 1]
-      ary << [x - 1, y + 1]
-      ary << [x - 1, y - 1]
-    end
+    # while ary.length < 14
+      if Board.new.include?([x, y])
+        ary << [x + 1, y + 1]
+        ary << [x + 1, y - 1]
+        ary << [x - 1, y + 1]
+        ary << [x - 1, y - 1]
+      # binding.pry
+        diagonal(ary[0][0], ary[0][1])
+      end
+    # end
+    return ary
   end
 end
 
@@ -98,7 +104,7 @@ class Pawn < Pieces
 end
 
 class Board
-
+  include DiagonalMover
   attr_reader :board, :key_array
   def initialize
     @board = {}
