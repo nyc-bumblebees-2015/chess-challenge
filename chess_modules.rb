@@ -1,7 +1,7 @@
 require 'pry'
-module Direction
+module Vertical
 
-  def self.vertical(num)
+  def vertical(num)
     right = []
     left = []
     7.times do |i|
@@ -16,8 +16,11 @@ module Direction
     end
     [right,left]
   end
+end
 
-  def self.horizontal(num)
+module Horizontal
+
+  def horizontal(num)
     up = []
     down = []
     7.times do |i|
@@ -32,8 +35,11 @@ module Direction
     end
     [up,down]
   end
+end
 
-  def self.diagonal(num)
+module Diagonal
+
+  def diagonal(num)
     top_right = []
     top_left = []
     bottom_right = []
