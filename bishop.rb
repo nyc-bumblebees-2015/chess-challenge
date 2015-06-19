@@ -9,10 +9,10 @@ class Bishop
   end
 
   def move?(origin,destination,board)
-    dx = destination[0].to_i
-    dy = destination[1].to_i
-    ox = origin[0].to_i
-    oy = origin[1].to_i
+    dx = destination[0]
+    dy = destination[1]
+    ox = origin[0]
+    oy = origin[1]
 
     if board[destination] != nil && board[destination].color == @color
       return false
@@ -24,7 +24,7 @@ class Bishop
     until distance == 1 do
       oy += horizontal
       ox += vertical
-      if board[:"#{ox}#{oy}"] != nil
+      if board[[ox,oy]] != nil
         return false
       end
       distance -= 1
