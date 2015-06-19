@@ -50,10 +50,8 @@ end
 
 class Queen < Pieces
   def moves
-    ary = []
-  ary << axis(x, y)
-  ary << move(x, y)
-  ary.flatten
+    vec_array = [[1, 1], [1, -1], [-1, 1], [-1, -1], [1, 0], [-1, 0], [0, 1], [0, -1]]
+    move([x, y], vec_array)
   end
 end
 
