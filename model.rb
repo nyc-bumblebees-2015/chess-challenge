@@ -36,7 +36,8 @@ end
 
 class Rook < Pieces
   def moves
-    axis(x, y)
+    directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+    move([x, y], directions)
   end
 end
 
