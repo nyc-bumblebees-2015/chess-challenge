@@ -64,10 +64,13 @@ class Board
 end
 
 # b = Board.new
-# # p b
+# puts b
+# p b.select_piece(11, :b)
+# p b.select_piece(11, :w)
+p b.select_piece(33, :w)
 # puts b
 # puts View.display(b.to_s)
 
-# # b.move(11, 44)
-# # p b
-# # puts b
+# b.move(11, 44)
+# p b
+# puts b
